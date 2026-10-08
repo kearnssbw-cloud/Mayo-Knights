@@ -427,13 +427,12 @@ function viewLeaderboard(){
     <tr class="row ${r.rank===1?"lead":""}" style="animation-delay:${Math.min(i,20)*25}ms">
       <td class="pos">${r.pos}</td>
       <td class="pl"><button aria-expanded="false" data-i="${i}">${esc(r.name)}</button></td>
-      ${CUP_COLS.map((c,j) => r.vals[j] === "?" ? `<td class="oc unk" title="${esc(c.label)}: not added yet">?</td>` : r.vals[j] != null ? `<td class="oc" title="${esc(c.label)}">${r.vals[j]}</td>` : `<td class="oc empty" aria-label="No points"></td>`).join("")}
+      ${CUP_COLS.map((c,j) => r.vals[j] === "?" ? `<td class="oc empty" aria-label="No points"></td>` : r.vals[j] != null ? `<td class="oc" title="${esc(c.label)}">${r.vals[j]}</td>` : `<td class="oc empty" aria-label="No points"></td>`).join("")}
       <td class="tot${r.partial?" part":""}">${r.total}</td>
     </tr>`).join("");
   return `
     <h1>Louis Prendergast Golfer of the Year</h1>
     <p class="lede">The 2026 race for the trophy, updated after every outing. Tap a name to see where the points came from.</p>
-    <div class="notice"><strong>Still being filled in.</strong> ${Object.keys(PARTIAL).length} players are only filled in up to Captain's Day. Their Connemara points show as ? until they're added.</div>
     <section class="board" aria-label="Leaderboard">
       <div class="board-head"><img src="${CREST}" alt=""><div><div class="t1">Golfer of the Year</div><div class="t2">Louis Prendergast Trophy, 2026</div></div></div>
       <div class="board-scroll">
@@ -460,7 +459,7 @@ function wireLeaderboard(){
     document.querySelectorAll(".lb td.pl button").forEach(b => b.setAttribute("aria-expanded","false"));
     if (open) return;
     const r = CUP[+btn.dataset.i];
-    const items = CUP_COLS.map((c,j) => typeof r.vals[j] === "number" ? `<li><b>${esc(c.label)}</b>: ${r.vals[j]} pts</li>` : "").join("") + (r.partial ? `<li>Connemara not added yet</li>` : "");
+    const items = CUP_COLS.map((c,j) => typeof r.vals[j] === "number" ? `<li><b>${esc(c.label)}</b>: ${r.vals[j]} pts</li>` : "").join("");
     const d = document.createElement("tr");
     d.className = "detail";
     d.innerHTML = `<td colspan="${CUP_COLS.length+3}"><ul>${items}<li><a href="#/player/${slug(r.name)}">Full season</a></li></ul></td>`;
@@ -640,7 +639,7 @@ function viewPlayer(s){
   const rows = r ? CUP_COLS.map((c,j) => {
     const v = r.vals[j]; const o = OUTINGS.find(x => x.id === c.outing);
     if (c.upcoming) return `<tr class="dim"><td>${esc(c.label)}</td><td>Still to play</td><td class="n"></td></tr>`;
-    if (v === "?") return `<tr class="dim"><td>${esc(c.label)}</td><td>Not added yet</td><td class="n">?</td></tr>`;
+    if (v === "?") return `<tr class="dim"><td>${esc(c.label)}</td><td>To be confirmed</td><td class="n"></td></tr>`;
     if (v == null) return `<tr class="dim"><td>${esc(c.label)}</td><td>Didn't play</td><td class="n"></td></tr>`;
     return `<tr><td>${esc(c.label)}</td><td>${finishAt(name,o,j)}</td><td class="n cup">${v}</td></tr>`;
   }).join("") : "";
