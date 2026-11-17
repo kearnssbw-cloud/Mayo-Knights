@@ -165,6 +165,8 @@ ol.season p b{color:var(--ink);font-weight:650}
 .next h2{font-size:16px;color:var(--muted);font-weight:650;font-stretch:100%}
 .next-venue{font-size:clamp(36px,6vw,54px);font-weight:900;font-stretch:120%;line-height:1;margin:6px 0 6px}
 .next-when{margin:0 0 16px;font-weight:600}
+.next-title{margin:0 0 4px;font-weight:750;color:var(--red)}
+.next-note{margin:0 0 16px;color:var(--muted);font-size:15px}
 .next dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;margin:0 0 18px}
 .next dt{font-size:13px;color:var(--muted)}
 .next dd{margin:0;font-weight:600}
@@ -251,19 +253,19 @@ const JOINED = {
 const EXTRA_MEMBERS = ["Brian Phillips","Shane Mitchell","Padraig Mangan","Darragh Condron"];
 
 const OUTINGS = [
-  { id:"ballyhaunis", venue:"Ballyhaunis", date:"2026-02-07", tee:"9.00 to 10.30am", format:"Singles",
+  { id:"ballyhaunis", venue:"Ballyhaunis", date:"2026-02-07", tee:"9.10 to 10.50am", format:"Singles",
     results:[["Jimmy Burke",41],["Tom Byrne",41],["Brendan Gurren",39],["Anthony Hennelly",39],["Paul Hunter",38]],
     notes:"Captain Enda Gurren's first day of the season, and the start of the Golfer of the Year Trophy." },
   { id:"tubbercurry", venue:"Tubbercurry", date:"2026-03-07", tee:"9.00 to 10.30am", format:"Singles",
     results:[["Anthony Hennelly",43],["Noel Morley",42],["Enda Gurren",40],["Pat Connaughton",39],["Damien Cubbard",38]] },
-  { id:"ballinrobe", venue:"Ballinrobe", date:"2026-04-25", tee:"8.20 to 9.50am", format:"Scramble",
+  { id:"ballinrobe", venue:"Ballinrobe", date:"2026-04-25", tee:"8.20 to 9.50am", format:"Champagne scramble",
     teams:[
       {captain:"Andrew Murphy", score:110, players:["Andrew Murphy","Alan Gurren","Lawrence Daly","Jimmy Burke"]},
       {captain:"Ciaran McDermott", score:108, players:["Ciaran McDermott","Eric Hynes","Paul Hunter","Brendan Walsh"]},
       {captain:"Liam Kearns", score:105, players:["Liam Kearns","Peter Collins","Richy O'Connor","Padraig Niland"]}
     ],
     notes:"Welcome to new members Brendan Walsh, Richy O'Connor and Shane Mitchell. Thanks to Mel Tansey for the snacks and water." },
-  { id:"castlebar", venue:"Castlebar", date:"2026-05-16", tee:"9.30 to 11am", format:"Singles",
+  { id:"castlebar", venue:"Castlebar", date:"2026-05-16", tee:"9.30 to 10.40am", format:"Singles",
     results:[["Mel Tansey",43],["Seamus Freeman",41],["Brendan Walsh",39],["Tom Byrne",39],["Pat Connaughton",38]],
     notes:"Thanks to Mel for the goodie bags." },
   { id:"castle-dargan", venue:"Castle Dargan", date:"2026-06-13", tee:"9.00 to 10.50am", format:"Scramble",
@@ -273,26 +275,29 @@ const OUTINGS = [
       {captain:"Mel Tansey", score:104, players:["Mel Tansey","Martin Lynskey","Pat Connaughton","Michael Mangan"]}
     ],
     notes:"Welcome to new members Padraig and Michael Mangan." },
-  { id:"westport", venue:"Westport", date:"2026-07-04", tee:"10.30am to 12 noon", format:"Singles",
+  { id:"westport", venue:"Westport", date:"2026-07-04", tee:"10.30 to 11.40am", format:"Singles",
     results:[["Brendan Walsh",40],["Billy Kearns",37],["Pat Connaughton",35],["Gerry Kilkenny",34],["Ronan Gurren",34,"back 9"]],
     notes:"Welcome to new member Darragh Condron." },
   { id:"claremorris", venue:"Claremorris", title:"Captain's Day", date:"2026-08-22", tee:"9.00 to 11am", format:"Singles",
     results:[["Peter Collins",42],["Anthony Hennelly",41],["Damien Cubbard",40],["Liam O'Connell",38,"back 9"],["Gerry Kilkenny",38],["Joe Diskin",37]],
     notes:"Enda Gurren's Captain's Day, won by Peter Collins. Thanks to Chris, JP and the bar staff." },
-  { id:"ballyconneely", venue:"Connemara", place:"Ballyconneely", date:"2026-09-12", end:"2026-09-13", tee:"Saturday 1.30pm, Sunday from 12.20pm", format:"Two-day weekend",
+  { id:"ballyconneely", venue:"Connemara", place:"Ballyconneely", date:"2026-09-12", end:"2026-09-13", tee:"Saturday 1.30 to 2.30pm, Sunday 12.20 to 1.00pm", format:"Two-day weekend",
     prizes:[
       ["Saturday 18 holes","Tom Byrne"],["Saturday front 9","Michael Walsh"],["Saturday back 9","Brendan Walsh"],
       ["Sunday 18 holes","Billy Kearns"],["Sunday front 9","Noel Morley"],["Sunday back 9","Luke Gibbons"]
     ],
     overall:["Alan Gurren","Peter Collins","Damien Cubbard","Stephen Groarke"],
     days:[
-      {label:"Saturday", top:["Peter Collins","Alan Gurren","Tom Byrne","Stephen Groarke","Padraig Niland","N. McCarthy","Damien Cubbard","Michael Walsh"]},
-      {label:"Sunday", top:["Alan Gurren","Peter Collins","Billy Kearns","D. Parslow","Damien Cubbard","Noel Morley","L. Coen","Stephen Groarke"]}
+      {label:"Saturday", top:["Peter Collins","Alan Gurren","Tom Byrne","Stephen Groarke","Padraig Niland","Niall McCarthy","Damien Cubbard","Michael Walsh"]},
+      {label:"Sunday", top:["Alan Gurren","Peter Collins","Billy Kearns","David Parslow","Damien Cubbard","Noel Morley","Liam Coen","Stephen Groarke"]}
     ],
     notes:"First prize sponsored by Michael Divilly. Saturday and Sunday count as separate rounds for the Cup." },
   { id:"spain", venue:"Spain trip", date:"2026-10-07", end:"2026-10-09", format:"Society trip", trip:true },
-  { id:"mulranny", venue:"Mulranny", date:"2026-11-14", tee:"10.00am to 12.50pm", format:"Singles" },
-  { id:"claremorris-2", venue:"Claremorris", date:"2026-12-05", tee:"9.00 to 11am", format:"Scramble" }
+  { id:"mulranny", venue:"Mulranny", date:"2026-11-14", tee:"10.00 to 10.50am", format:"Singles",
+    results:[["Ronan Gurren",40,"back 9"],["David Parslow",40],["Luke Gibbons",38],["Michael Prenty",37],["Stephen Groarke",36,"back 9"],["Enda Gurren",null],["Billy Kearns",null],["Alan Gurren",null]],
+    notes:"A great turnout. Thanks to Mel for the goodies." },
+  { id:"claremorris-2", venue:"Claremorris", title:"Christmas outing", date:"2026-12-05", tee:"To be confirmed", format:"Champagne scramble",
+    cost:"€35 for golf, food and a pint", notes:"Final outing of the year. The Golfer of the Year will be announced on the day." }
 ];
 const CAPTAIN_LETTER = "As your incoming captain for 2026, I would like to ask you for your support in the Mayo Knights Golf Society. Looking forward to seeing you on the first tee!";
 const HONOURS = [
@@ -316,8 +321,8 @@ const CUP_COLS = [
   {code:"CMS", label:"Claremorris (Captain's Day)", outing:"claremorris"},
   {code:"CN1", label:"Connemara Saturday", outing:"ballyconneely"},
   {code:"CN2", label:"Connemara Sunday", outing:"ballyconneely"},
-  {code:"MUL", label:"Mulranny, 14 November", outing:"mulranny", upcoming:true},
-  {code:"CM2", label:"Claremorris scramble, 5 December", outing:"claremorris-2", upcoming:true}
+  {code:"MUL", label:"Mulranny", outing:"mulranny"},
+  {code:"CM2", label:"Claremorris Christmas outing, 5 December", outing:"claremorris-2", upcoming:true}
 ];
 const _ = null;
 const SHEET = {
@@ -332,7 +337,7 @@ const SHEET = {
   "Brendan Walsh":     [_,_,4,8,_,12,2,2,_],
   "Ronan Gurren":      [2,2,2,4,5,6,2,_,_],
   "Mel Tansey":        [_,2,2,12,3,_,2,2,_],
-  "L. Coen":           [2,5,2,_,2,4,2,2,4],
+  "Liam Coen":           [2,5,2,_,2,4,2,2,4],
   "Stephen Groarke":   [2,_,_,2,4,2,2,7,3],
   "Padraig Niland":    [3,_,3,2,2,2,2,6,2],
   "Enda Gurren":       [2,8,_,2,2,2,2,2,2],
@@ -340,41 +345,49 @@ const SHEET = {
   "Seamus Freeman":    [_,2,2,10,5,_,2,_,_],
   "Michael Divilly":   [2,2,2,5,5,2,2,_,_],
   "Paul Hunter":       [6,2,4,_,2,2,2,_,_],
-  "J. Brady":          [2,2,2,2,2,2,2,2,2]
+  "John Brady":          [2,2,2,2,2,2,2,2,2]
 };
 
 /* Rest of the field: rounds up to Captain's Day from the earlier sheet. Connemara added below. */
 const PARTIAL = {
   "Gerry Kilkenny":   [_,2,2,2,2,7,6],   "Liam O'Connell":  [5,2,2,_,2,_,7],
   "Brendan Gurren":   [8,2,_,2,2,_,2],   "Luke Gibbons":    [2,_,2,2,4,2,2],
-  "Sean Sweeney":     [2,_,2,2,5,_,3],   "C. Nicholson":    [2,2,2,2,2,2,2],
+  "Sean Sweeney":     [2,_,2,2,5,_,3],   "Christy Nicholson":    [2,2,2,2,2,2,2],
   "Eric Hynes":       [4,2,4,2,_,_,2],   "Joe Diskin":      [2,2,2,2,_,_,5],
-  "H. Hughes":        [2,2,2,2,2,_,2],   "M. Murphy":       [_,2,2,2,2,2,2],
-  "P. Moran":         [2,2,2,2,_,2,2],   "Andrew Murphy":   [_,2,5,_,_,2,2],
-  "M. Prenty":        [3,2,_,2,_,2,2],   "J.O. Gibbons":    [2,2,_,_,2,3,2],
-  "T. Griffin":       [_,2,2,2,2,_,2],   "B. Pierik":       [2,_,2,2,_,2,2],
+  "Harry Hughes":        [2,2,2,2,2,_,2],   "Martin Murphy":       [_,2,2,2,2,2,2],
+  "Padraig Moran":         [2,2,2,2,_,2,2],   "Andrew Murphy":   [_,2,5,_,_,2,2],
+  "Michael Prenty":        [3,2,_,2,_,2,2],   "John O. Gibbons":    [2,2,_,_,2,3,2],
+  "Tom Griffin":       [_,2,2,2,2,_,2],   "Billy Pierik":       [2,_,2,2,_,2,2],
   "Bernard Hynes":    [_,2,_,2,4,_,2],   "Martin Lynskey":  [2,2,_,_,3,_,2],
-  "Richy O'Connor":   [_,_,3,_,2,2,2],   "N. McCarthy":     [2,2,_,_,2,2,_],
-  "N. Grier":         [_,2,2,_,2,_,2],   "D. Costello":     [2,2,2,_,_,_,2],
-  "D. Hughes":        [2,_,2,_,2,_,2],   "D. Parslow":      [_,_,_,2,2,2,2],
-  "J. Finn":          [2,2,_,2,_,_,2],   "Lawrence Daly":   [_,_,5,2,_,_,_],
-  "Liam Kearns":      [_,_,3,2,_,_,2],   "A. Campbell":     [_,2,_,_,2,_,2],
-  "Ciaran McDermott": [_,_,4,_,_,_,_],   "F. Flynn":        [2,2,_,_,_,_,_],
-  "C. Hennelly":      [2,_,2,_,_,_,_],   "Shane Mitchell":  [_,_,2,_,_,2,_],
-  "Padraig Mangan":   [_,_,_,_,2,2,_],   "C. O'Neill":      [2,_,_,_,_,_,2],
-  "Michael Mangan":   [_,_,_,_,3,_,_],   "S. Cox":          [2,_,_,_,_,_,_],
-  "P. Hunt":          [2,_,_,_,_,_,_],   "D. Connolly":     [_,_,_,2,_,_,_],
-  "K. Prendergast":   [2,_,_,_,_,_,_],   "D. Gallagher":    [_,_,_,2,_,_,_],
-  "Darragh Condron":  [_,_,_,_,_,2,_],   "K. Connolly":     [_,_,_,_,2,_,_],
-  "J. Jennings":      [_,_,_,_,_,_,2],   "P. Coyne":        [_,_,_,_,_,_,2],
-  "J.P. Hughes":      [2,_,_,_,_,_,2],   "Michael Walsh":   [_,_,_,_,_,_,_],   "T. Connolly":     [_,_,_,_,_,_,2]
+  "Richy O'Connor":   [_,_,3,_,2,2,2],   "Niall McCarthy":     [2,2,_,_,2,2,_],
+  "Noel Grier":         [_,2,2,_,2,_,2],   "Dermot Costello":     [2,2,2,_,_,_,2],
+  "Declan Hughes":        [2,_,2,_,2,_,2],   "David Parslow":      [_,_,_,2,2,2,2],
+  "John Finn":          [2,2,_,2,_,_,2],   "Lawrence Daly":   [_,_,5,2,_,_,_],
+  "Liam Kearns":      [_,_,3,2,_,_,2],   "Aidan Campbell":     [_,2,_,_,2,_,2],
+  "Ciaran McDermott": [_,_,4,_,_,_,_],   "Frank Flynn":        [2,2,_,_,_,_,_],
+  "Cathal Hennelly":      [2,_,2,_,_,_,_],   "Shane Mitchell":  [_,_,2,_,_,2,_],
+  "Padraig Mangan":   [_,_,_,_,2,2,_],   "Chris O'Neill":      [2,_,_,_,_,_,2],
+  "Michael Mangan":   [_,_,_,_,3,_,_],   "Seamus Cox":          [2,_,_,_,_,_,_],
+  "Paul Hunt":          [2,_,_,_,_,_,_],   "Damien Connolly":     [_,_,_,2,_,_,_],
+  "Keith Prendergast":   [2,_,_,_,_,_,_],   "Declan Gallagher":    [_,_,_,2,_,_,_],
+  "Darragh Condron":  [_,_,_,_,_,2,_],   "Kevin Connolly":     [_,_,_,_,2,_,_],
+  "Jarlath Jennings":      [_,_,_,_,_,_,2],   "Pat Coyne":        [_,_,_,_,_,_,2],
+  "J.P. Hughes":      [2,_,_,_,_,_,2],   "Michael Walsh":   [_,_,_,_,_,_,_],   "Daniel McHale":       [_,_,_,_,_,_,_],   "Tom Connolly":     [_,_,_,_,_,_,2]
 };
 
 /* Connemara Saturday / Sunday for the rest of the field, from the day sheets */
 const CONNEMARA = {
-  "N. McCarthy":[5,_], "Michael Walsh":[3,_], "Luke Gibbons":[2,2], "D. Parslow":[2,7], "P. Moran":[2,2],
-  "Martin Lynskey":[2,_], "M. Prenty":[2,_], "H. Hughes":[2,2], "D. Hughes":[2,2], "Bernard Hynes":[2,_],
-  "N. Grier":[2,_], "Sean Sweeney":[_,2]
+  "Niall McCarthy":[5,_], "Michael Walsh":[3,_], "Luke Gibbons":[2,2], "David Parslow":[2,7], "Padraig Moran":[2,2],
+  "Martin Lynskey":[2,_], "Michael Prenty":[2,_], "Harry Hughes":[2,2], "Declan Hughes":[2,2], "Bernard Hynes":[2,_],
+  "Noel Grier":[2,_], "Sean Sweeney":[_,2]
+};
+
+/* Mulranny, from the day sheet */
+const MULRANNY = {
+  "Ronan Gurren":12, "David Parslow":10, "Luke Gibbons":8, "Michael Prenty":7, "Stephen Groarke":6,
+  "Enda Gurren":5, "Billy Kearns":4, "Alan Gurren":3, "Pat Connaughton":2, "Paul Hunter":2, "Christy Nicholson":2,
+  "Tom Byrne":2, "Daniel McHale":2, "John Brady":2, "Billy Pierik":2, "Martin Lynskey":2, "Declan Hughes":2, "Harry Hughes":2,
+  "J.P. Hughes":2, "Jimmy Burke":2, "Seamus Freeman":2, "Padraig Niland":2
 };
 
 /* ===== SCORING ===== */
@@ -401,9 +414,9 @@ const outingName = o => o.title ? `${o.venue}, ${o.title}` : o.venue;
 
 function computeCup(){
   const rows = [
-    ...Object.entries(SHEET).map(([name, vals]) => ({name, vals, total: vals.reduce((a,v) => a + (v||0), 0)})),
-    ...Object.entries(PARTIAL).map(([name, v]) => { const vals = [...v, ...(CONNEMARA[name] || [_,_])]; return {name, vals, total: vals.reduce((a,x) => a + (x||0), 0)}; })
-  ].sort((a,b) => b.total-a.total || a.name.localeCompare(b.name));
+    ...Object.entries(SHEET).map(([name, v]) => ({name, vals:[...v]})),
+    ...Object.entries(PARTIAL).map(([name, v]) => ({name, vals:[...v, ...(CONNEMARA[name] || [_,_])]}))
+  ].map(r => { r.vals.push(MULRANNY[r.name] ?? _); r.total = r.vals.reduce((a,x) => a + (x||0), 0); return r; }).sort((a,b) => b.total-a.total || a.name.localeCompare(b.name));
   rows.forEach(r => {
     const first = rows.findIndex(x => x.total === r.total);
     r.rank = first+1;
@@ -452,7 +465,7 @@ function viewLeaderboard(){
           <tbody>${body}</tbody>
         </table>
       </div>
-      <div class="board-foot">${CUP.length} players after ${scored} rounds. Mulranny and Claremorris still to play.</div>
+      <div class="board-foot">${CUP.length} players after ${scored} rounds. ${CUP_COLS.filter(c=>c.upcoming).map(c=>c.label.split(",")[0]).join(" and ") || "Season complete"}${CUP_COLS.some(c=>c.upcoming) ? " still to play." : "."}</div>
     </section>
     <div class="rules">
       <div><h3>Appearance</h3><p>2 points for every player at every outing.</p></div>
@@ -506,14 +519,16 @@ function viewHome(){
     <div class="home-grid">
       ${NEXT ? `<section class="next">
         <h2>Next outing</h2>
-        <p class="next-venue">${esc(NEXT.venue)}</p>
+        <p class="next-venue">${esc(NEXT.venue)}</p>${NEXT.title ? `<p class="next-title">${esc(NEXT.title)}</p>` : ""}
         <p class="next-when">${esc(fmtDate(NEXT,true))}${days > 0 ? `, ${days} ${days===1?"day":"days"} away` : ""}</p>
         <dl>
           <div><dt>Format</dt><dd>${esc(NEXT.format)}</dd></div>
           <div><dt>Tee times</dt><dd>${esc(NEXT.tee)}</dd></div>
           <div><dt>Confirm</dt><dd>In the WhatsApp group</dd></div>
           <div><dt>Buggies</dt><dd>Contact the clubhouse</dd></div>
+          ${NEXT.cost ? `<div><dt>Cost</dt><dd>${esc(NEXT.cost)}</dd></div>` : ""}
         </dl>
+        ${NEXT.notes ? `<p class="next-note">${esc(NEXT.notes)}</p>` : ""}
         <a class="btn" href="#/outings">See all outings</a>
       </section>` : ""}
       <section class="mini">
@@ -555,7 +570,7 @@ function viewResults(){
       let table = "";
       if (o.results){
         table = `<table class="res"><thead><tr><th>Pos</th><th>Player</th><th class="n">Points</th><th class="n">Cup</th></tr></thead><tbody>
-          ${o.results.map(([p,s,cb],i) => `<tr><td class="p">${ord(i+1)}</td><td>${nameLink(p)}${cb?`<div class="team">on ${esc(cb)}</div>`:""}</td><td class="n">${s}</td><td class="n cup">${cupPtsOrBlank(p,o)}</td></tr>`).join("")}
+          ${o.results.map(([p,s,cb],i) => `<tr><td class="p">${ord(i+1)}</td><td>${nameLink(p)}${cb?`<div class="team">on ${esc(cb)}</div>`:""}</td><td class="n">${s ?? ""}</td><td class="n cup">${cupPtsOrBlank(p,o)}</td></tr>`).join("")}
         </tbody></table>`;
       } else if (o.teams){
         table = `<table class="res"><thead><tr><th>Pos</th><th>Team</th><th class="n">Points</th><th class="n">Cup each</th></tr></thead><tbody>
@@ -595,7 +610,7 @@ function viewOutings(){
         let body;
         if (played(o)) body = `<p>${esc(o.format)}. Winner: <b>${winnerOf(o)}</b>. <a href="#/results/${o.id}">Full results</a></p>`;
         else if (o.trip) body = `<p>Society trip, not part of the Cup.</p>`;
-        else body = `<p>${esc(o.format)}. Tee times ${esc(o.tee)}.</p>`;
+        else body = `<p>${esc(o.format)}. Tee times: ${esc(o.tee)}.${o.cost ? ` ${esc(o.cost)}.` : ""}${o.notes ? ` ${esc(o.notes)}` : ""}</p>`;
         return `<li data-n="${i+1}" class="${st==="past"?"":"tbc"} ${st==="now"?"is-now":""} ${o===NEXT?"is-next":""}">
           <div class="when">${esc(fmtDate(o))}${played(o) && o.tee ? `, tee times ${esc(o.tee)}` : ""}</div>
           <h3>${esc(outingName(o))}${o.place?` <small>${esc(o.place)}</small>`:""} ${tag}</h3>
@@ -685,7 +700,7 @@ function viewHonours(){
       ${HONOURS.map(h => `<section class="honour">
         <h2>${esc(h.title)}</h2>
         <table class="res"><tbody>
-          ${h.rows.map(([y,n]) => `<tr><td class="p">${y}</td><td>${n ? nameLink(n) : `In progress. ${nameLink(leader.name)} leads on ${leader.total} with two rounds to go.`}</td></tr>`).join("")}
+          ${h.rows.map(([y,n]) => `<tr><td class="p">${y}</td><td>${n ? nameLink(n) : `In progress. ${nameLink(leader.name)} leads on ${leader.total} with ${(n => n === 1 ? "one round" : n + " rounds")(CUP_COLS.filter(c=>c.upcoming).length)} to go.`}</td></tr>`).join("")}
         </tbody></table>
       </section>`).join("")}
     </div>
